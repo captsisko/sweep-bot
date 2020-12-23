@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="SweepBOT">
+
+  <xacro:include filename="$(find sweep_bot)/urdf/sensors/camera.xacro"/>
+  <xacro:include filename="$(find sweep_bot)/urdf/actuators/wheels.xacro"/>
+  <xacro:include filename="$(find sweep_bot)/urdf/sensors/MultiCamera.xacro"/>
+
+  <!-- body -->
+  <xacro:property name="chasis_length" value="1.0"/>
+  <xacro:property name="chasis_heigth" value="0.45"/>
+  <xacro:property name="chasis_width" value="0.5"/>
+
+  <link name="chasis">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <!-- <mass value="1.0"/> -->
+      <mass value="15.0"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+    <visual name="">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="${chasis_length} ${chasis_heigth} ${chasis_width}"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.0 1.0 0.0 1.0"/>
+        <!-- <texture filename=""/> -->
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="${chasis_length} ${chasis_heigth} ${chasis_width}"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference='chasis'>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- wheels -->
+  <xacro:wheel side="left" position="fore" flip='1' alt='1'/>
+  <xacro:wheel side="right" position="fore" flip='-1' alt='1'/>
+  <xacro:wheel side="left" position="aft" flip='1' alt='-1'/>
+  <xacro:wheel side="right" position="aft" flip='-1' alt='-1'/>
+
+  <!-- LIDAR -->
+  <!-- <xacro:VLP16 /> -->
+  <!-- name="velodyne" topic="/velodyne_points" hz="10" lasers="16" samples="1875" collision_range="0.3" min_range="0.9" max_range="130.0" noise="0.008" min_angle="-${M_PI}" max_angle="${M_PI}" gpu="false"/> -->
+  <!-- <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+  <VLP-16 parent="chasis" name="velodyne" topic="/velodyne_points" hz="10" samples="1000" gpu="10">
+    <origin xyz="0 0 0.25" rpy="0 0 0" />
+  </VLP-16> -->
+  <!-- os1_sensor_mount_joint -->
+  <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro"/>
+  <OS1-64 parent="chasis" name="os1_sensor" hz="10" samples="220">
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+  </OS1-64>
+
+  <!-- MULTI-CAMERA -->
+  <xacro:sweeper_cams/>
+  <!-- <xacro:sweeper_cam/> -->
+
+  <!--  -->
+  <!-- <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller_front">
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>True</publishWheelTF>
+      <publishTf>1</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftJoint>body_wheel_left_aft_joint</leftJoint>
+      <rightJoint>body_wheel_right_aft_joint</rightJoint>
+      <wheelSeparation>0.3</wheelSeparation>
+      <wheelDiameter>0.08</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>30</wheelTorque>
+      <wheelAcceleration>1.8</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>chasis</robotBaseFrame>
+    </plugin>
+  </gazebo> -->
+  <!--  -->
+
+  <!-- SKIP STEERING -->
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>body_wheel_left_fore_joint</leftFrontJoint>
+      <rightFrontJoint>body_wheel_right_fore_joint</rightFrontJoint>
+      <leftRearJoint>body_wheel_left_aft_joint</leftRearJoint>
+      <rightRearJoint>body_wheel_right_aft_joint</rightRearJoint>
+      <wheelSeparation>0.5</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <robotBaseFrame>chasis</robotBaseFrame>
+      <torque>20</torque>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>true</broadcastTF>
+    </plugin>
+  </gazebo>
+  <!--  -->
+
+</robot>
+
+<!-- 
+  body_wheel_left_aft_joint 
+  body_wheel_left_fore_joint
+  body_wheel_right_aft_joint 
+  body_wheel_right_fore_joint 
+-->
