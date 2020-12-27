@@ -4,19 +4,18 @@
   <!-- WHEELS -->
   <xacro:property name="wheel_radius" value="0.1"/>
   <xacro:property name="wheel_length" value="0.1"/>
-  <!-- <xacro:property name="wheel_rpy" value="1.55 0.0 0.0"/> -->
   <xacro:property name="wheel_rpy" value="1.57075 0 0"/>
-  <!-- <xacro:property name="wheel_rpy" value="0 0 0"/> -->
+  <xacro:property name="wheel_mass" value="2.0"/>
+  <xacro:property name="ixx" value="${1/12 * wheel_mass * (wheel_length * wheel_length)}"/>
+  <xacro:property name="izz" value="${1/12 * wheel_mass * (wheel_length * wheel_length)}"/>
 
   <xacro:macro name="wheel" params="side position flip alt">
     <xacro:property name="wheel_xyz" value="${alt * 0.3} ${flip * 0.2} -0.25"/>
 
     <link name="wheel_${side}_${position}">
       <inertial>
-        <!-- <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> -->
-        <!-- <mass value="1.0"/> -->
-        <mass value="3.0"/>
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${ixx}" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="${izz}"/>
       </inertial>
       <visual name="">
         <origin xyz="0 0 0" rpy="${wheel_rpy}"/>

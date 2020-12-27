@@ -9,13 +9,16 @@
   <xacro:property name="chasis_length" value="1.0"/>
   <xacro:property name="chasis_heigth" value="0.45"/>
   <xacro:property name="chasis_width" value="0.5"/>
+  <xacro:property name="chasis_mass" value="15.0"/>
+  <xacro:property name="ixx" value="${(1/12 * chasis_mass) * ((chasis_heigth * chasis_heigth) + (chasis_length * chasis_length))}"/>
+  <xacro:property name="iyy" value="${(1/12 * chasis_mass) * ((chasis_width * chasis_width) + (chasis_length * chasis_length))}"/>
+  <xacro:property name="izz" value="${(1/12 * chasis_mass) * ((chasis_width * chasis_width) + (chasis_heigth * chasis_heigth))}"/>
 
   <link name="chasis">
     <inertial>
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      <!-- <mass value="1.0"/> -->
-      <mass value="15.0"/>
-      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 1.57 0.0"/>
+      <mass value="${chasis_mass}"/>
+      <inertia ixx="${ixx}" ixy="0.0" ixz="0.0" iyy="${iyy}" iyz="0.0" izz="${izz}"/>
     </inertial>
     <visual name="">
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -24,7 +27,6 @@
       </geometry>
       <material name="">
         <color rgba="0.0 1.0 0.0 1.0"/>
-        <!-- <texture filename=""/> -->
       </material>
     </visual>
     <collision>
@@ -59,6 +61,8 @@
 
   <!-- MULTI-CAMERA -->
   <xacro:sweeper_cams/>
+  <xacro:overwatch_cam/>
+  
   <!-- <xacro:sweeper_cam/> -->
 
   <!--  -->

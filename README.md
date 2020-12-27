@@ -8,5 +8,6 @@ Edited CitySim gazebo world into which model is spawned.
 
 ## Launch commands:
 
-***roslaunch sweep_bot street.launch***
-
+```
+roslaunch sweep_bot street.launch
+```
