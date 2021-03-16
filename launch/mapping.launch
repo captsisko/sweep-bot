@@ -6,7 +6,7 @@
 
     <include file='$(find gazebo_ros)/launch/empty_world.launch'>
         <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/simple_city.world'/> -->
-        <arg name="world_name" value='$(find sweep_bot)/worlds/example.world'/>
+        <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/example.world'/> -->
         <!-- <arg name="world_name" value='$(find turtlebot3_gazebo)/worlds/turtlebot3_house.world'/> -->
     </include>
 
@@ -14,4 +14,6 @@
         <!-- <param name="base_frame" value="$(arg base_frame)"/> -->
         <param name="base_frame" value="chasis"/>
     </node>
+
+
 </launch>
