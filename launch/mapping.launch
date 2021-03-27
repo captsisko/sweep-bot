@@ -6,14 +6,29 @@
 
     <include file='$(find gazebo_ros)/launch/empty_world.launch'>
         <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/simple_city.world'/> -->
+        <arg name="world_name" value='$(find sweep_bot)/worlds/small_city_test.world'/>
+        <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/small_city_updated.world'/> -->
+        <!-- <arg name="world_name" value='/home/sisko/Desktop/test.world'/> -->
+        <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/small_city.world'/> -->
+        <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/gazebo_models_worlds_collection/worlds/simple_env_1.world'/> -->
+        <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/crossroads.world'/> -->
         <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/example.world'/> -->
         <!-- <arg name="world_name" value='$(find turtlebot3_gazebo)/worlds/turtlebot3_house.world'/> -->
+        <!-- <arg name="world_name" value="$(find simple_robot_gazebo)/worlds/labyrinth.world"/> -->
+        <!-- <arg name="world_name" value="$(find simple_robot_gazebo)/worlds/jackal_race.world"/> -->
+        <!-- <arg name="world_name" value="$(find ouster_description)/worlds/example.world"/> -->
+        <!-- <arg name="world_name" value="$(find ouster_description)/worlds/os-1-64.world"/> -->
+        <!-- <arg name="world_name" value="$(find citysim)/worlds/simple_city.world"/> -->
+        <!-- <arg name="world_name" value="$(find hector_gazebo_worlds)/worlds/rolling_landscape_120m.world"/> -->
     </include>
 
     <node name='gmapping' pkg='gmapping' type='slam_gmapping'>
         <!-- <param name="base_frame" value="$(arg base_frame)"/> -->
         <param name="base_frame" value="chasis"/>
-    </node>
-
-
+        <param name="map_update_interval" value="2.5"/>
+        <param name="minimumScore" value="300"/>
+        <param name="linearUpdate" value="0"/>
+        <param name="maxUrange" value="25.0"/>
+        <param name="sigma" value="1.0"/>
+    </node>    
 </launch>
