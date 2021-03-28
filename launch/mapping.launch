@@ -2,7 +2,7 @@
 <launch>
     <include file='$(find sweep_bot)/launch/cleaner.launch'/>
 
-    <node name='rviz' type='rviz' pkg='rviz'/>
+    <node name='rviz' type='rviz' pkg='rviz' args='-d $(find sweep_bot)/config/sweeper.rviz'/>
 
     <include file='$(find gazebo_ros)/launch/empty_world.launch'>
         <!-- <arg name="world_name" value='$(find sweep_bot)/worlds/simple_city.world'/> -->
