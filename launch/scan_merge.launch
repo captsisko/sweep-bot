@@ -3,7 +3,7 @@
 <launch>
     <node name='scan_merger' type='laserscan_multi_merger' pkg='ira_laser_tools' output='screen'>
         <param name="cloud_destination_topic" value="/scan_cloud"/>
-        <param name="scan_destination_topic" value="/scan"/>
+        <param name="scan_destination_topic" value="/hector_scan"/>
         <param name="destination_frame" value="/hokuyo_link_top"/>
         <!-- <param name="laserscan_topics" value="/scan_front /scan_left /scan_right /scan_rear"/> -->
         <param name="laserscan_topics" value="/scan_left /scan_right"/>

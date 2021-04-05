@@ -46,7 +46,7 @@
                     <cameraName>multisense_sl/camera</cameraName>
                     <imageTopicName>image_raw</imageTopicName>
                     <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                    <frameName>right_camera</frameName>
+                    <frameName>left_camera_optical_frame</frameName>
                     <!--<rightFrameName>right_camera_optical_frame</rightFrameName>-->
                     <hackBaseline>0.07</hackBaseline>
                     <distortionK1>0.0</distortionK1>
@@ -58,7 +58,7 @@
             </sensor>
         </gazebo>
 
-        <!--  -->
+        <!-- CAMERA LEFT -->
 
         <link name="left_camera">
             <inertial>
@@ -84,12 +84,16 @@
             </collision>
         </link>
         <joint name="left_camera_joint" type="fixed">
-            <origin xyz="0.45 -${chasis_width / 1.82} 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.45 -${chasis_heigth / 1.82} 0.0" rpy="0.0 0.0 0.0"/>
             <parent link="chasis"/>
             <child link="left_camera"/>
             <!-- <axis xyz="0.0 0.0 0.0"/> -->
             <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
         </joint>
+
+
+
+        <!-- CAMERA RIGHT -->
 
         <link name="right_camera">
             <inertial>
@@ -115,7 +119,7 @@
             </collision>
         </link>
         <joint name="right_camera_joint" type="fixed">
-            <origin xyz="0.45 ${chasis_width / 1.82} 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.45 ${chasis_heigth / 1.82} 0.0" rpy="0.0 0.0 0.0"/>
             <parent link="chasis"/>
             <child link="right_camera"/>
             <!-- <axis xyz="0.0 0.0 0.0"/> -->
