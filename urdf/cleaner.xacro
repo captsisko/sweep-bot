@@ -65,10 +65,10 @@
   <xacro:overwatch_cam/>
   
   <!-- LASERS -->
-  <!-- <xacro:laser_top/> -->
-  <xacro:laser_front/>
-  <!-- <xacro:laser_left/> -->
-  <!-- <xacro:laser_right/> -->
+  <xacro:laser_top/>
+  <!-- <xacro:laser_front/> -->
+  <xacro:laser_left/>
+  <xacro:laser_right/>
   <!-- <xacro:laser_rear/> -->
   
 
